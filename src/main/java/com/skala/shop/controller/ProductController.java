@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/products")
-@Tag(name = "상품 관리", description = "상품 CRUD API") 
+@Tag(name = "상품 관리", description = "상품 CRUD API")
 public class ProductController {
 
     private final ProductService productService;
@@ -50,7 +50,7 @@ public class ProductController {
     // 상품 등록
     @PostMapping
     @Operation(summary = "상품 등록")
-    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.create(request));
     }
 
@@ -65,7 +65,7 @@ public class ProductController {
     // 상품 삭제
     @DeleteMapping("/{id}")
     @Operation(summary = "상품 삭제")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         productService.delete(id);
         return ResponseEntity.noContent().build();
     }
